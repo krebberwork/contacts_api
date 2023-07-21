@@ -1,3 +1,5 @@
+# Created from https://generatedata.com
+
 DROP TABLE IF EXISTS `contacts`;
 
 CREATE TABLE `contacts` (
