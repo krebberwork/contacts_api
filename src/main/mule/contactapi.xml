@@ -7,7 +7,7 @@ http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/m
     </http:listener-config>
     <apikit:config name="contactapi-config" api="resource::org.mule.examples:contactapi:1.0.0:raml:zip:contactapi.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <db:config name="Database_Config" doc:name="Database Config" doc:id="a6e8707b-af77-45f7-8363-74ec288bcaad" >
-		<db:my-sql-connection host="cloud-services.demos.mulesoft.com" port="32068" user="root" password="FuA_OBkks0EL4zYQ" database="demodb" />
+		<db:my-sql-connection host="cloud-services.demos.mulesoft.com" port="32010" user="jkreuzer" password="r7CyvYjbK5**JK7f" database="demodb" />
 	</db:config>
 	<api-gateway:autodiscovery apiId="18456423" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="8f2f72d2-a7a1-4ba4-831e-17ed856bd970" flowRef="contactapi-main" />
 	<flow name="contactapi-main">
@@ -131,7 +131,7 @@ output application/json
     </flow>
     <flow name="get:\contacts:contactapi-config">
         <db:select doc:name="Select" doc:id="f4272b67-3de9-4242-9019-ac5d984008d6" config-ref="Database_Config">
-			<db:sql ><![CDATA[select * from customer]]></db:sql>
+			<db:sql ><![CDATA[select * from contacts]]></db:sql>
 		</db:select>
 		<ee:transform doc:name="Transform Message" doc:id="676aad20-18a9-4b99-843c-d2502d10534e" >
 			<ee:message >
@@ -139,9 +139,11 @@ output application/json
 output application/json
 ---
 payload map(item,index) ->{
-	Email: item.email,
-	FirstName: item.firstName,
-	LastName: item.lastName
+	Company: item.Company,
+	Email: (item.email default "") ++ (item.Email default ""),
+	FirstName: (item.firstName default "") ++ (item.FirstName default ""),
+	LastName: (item.lastName
+default "") ++ (item.LastName default "")
 }]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
