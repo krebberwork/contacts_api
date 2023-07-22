@@ -1,4 +1,4 @@
-# contacts_api
+# Contact API Tutorial
 ## References
 [Designing your first API Specification](https://developer.mulesoft.com/tutorials-and-howtos/quick-start/designing-your-first-api/)
 
